@@ -1085,10 +1085,10 @@ if __name__ == "__main__":
         kemalg_list = read_all_lines_hex("kem_alg.csv")#Diğer dosyalarda aynı indexteki yerlere bakarak anahtarı decapsüle deriz
         secret_key_hex = secretkey_list[index]
         secret_key = bytes.fromhex(secret_key_hex)
-        kem_alg = kemalg_list[index]
+        kem_alg_sol = kemalg_list[index]
         ciphertext_bytes = bytes.fromhex(hex_input)#Byte dönüşümü
 
-        with oqs.KeyEncapsulation(kem_alg, secret_key=secret_key) as kem:
+        with oqs.KeyEncapsulation(kem_alg_sol, secret_key=secret_key) as kem:
             shared_secret_dec=kem.decap_secret(ciphertext_bytes)#Decapsüle işlemi
         print(f"✅ Ciphertext bulundu ve secret key ile çözüldü.")
         print(f"Shared secret: {shared_secret_dec.hex()}")#Shared secret bulundu
@@ -1168,3 +1168,4 @@ if __name__ == "__main__":
                 print("Dosya tipi tespit edilemedi.")
     else:
         print("❌ Geçersiz seçim.")
+
